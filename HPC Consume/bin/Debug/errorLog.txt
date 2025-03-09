@@ -1,0 +1,4 @@
+22-02-2025 10:43:26Serial 2145790070 YA registrado:'2145790070' is already registered.  Please revise input selections accordingly.
+22-02-2025 13:30:08,Error al consultar el status del serial :Índice fuera de los límites de la matriz.
+22-02-2025 13:34:00,Error al consultar el status del serial 2504432147:Índice fuera de los límites de la matriz.
+22-02-2025 14:48:00Serial 2504432147 YA registrado:'2504432147' is already registered.  Please revise input selections accordingly.

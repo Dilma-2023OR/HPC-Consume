@@ -1,0 +1,8 @@
+[RUNCARD_INFO]
+warehouseBin=INVENTORY
+warehouseLoc=INVENTORY
+machineID=
+partclass=SubAssy
+opcode=A100
+seqnum=10
+etiqnum=1
