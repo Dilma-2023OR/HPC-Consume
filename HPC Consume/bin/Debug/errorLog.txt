@@ -1,4 +1,16 @@
-22-02-2025 10:43:26Serial 2145790070 YA registrado:'2145790070' is already registered.  Please revise input selections accordingly.
-22-02-2025 13:30:08,Error al consultar el status del serial :Índice fuera de los límites de la matriz.
-22-02-2025 13:34:00,Error al consultar el status del serial 2504432147:Índice fuera de los límites de la matriz.
-22-02-2025 14:48:00Serial 2504432147 YA registrado:'2504432147' is already registered.  Please revise input selections accordingly.
+21-03-2025 11:37:12,Pase NO otorgado al serial 2508005500002:BOM item consumption issue: Serial or lot number source is required to be entered for BOM item 172115970,00 for 2508005500002.
+21-03-2025 12:34:53,Pase NO otorgado al serial 2508005500003:BOM item consumption issue: Serial or lot number source is required to be entered for BOM item 172115970,00 for 2508005500003.
+21-03-2025 12:38:51,Pase NO otorgado al serial 2508005500002:BOM item consumption issue: Serial or lot number source is required to be entered for BOM item 172115970,00 for 2508005500002.
+21-03-2025 12:44:05,Pase NO otorgado al serial 2508005500003:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:08:22,Pase NO otorgado al serial 2508005500002:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:12:54,Pase NO otorgado al serial 2508005500002:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:15:10,Pase NO otorgado al serial 2508005500003:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:18:25,Pase NO otorgado al serial 2508005500002:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:19:51,Pase NO otorgado al serial 2508005500003:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:22:19,Pase NO otorgado al serial 2508005500002:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:52:05,Pase NO otorgado al serial 2508005500002:Invalid BOM data submitted, item_qty is required
+21-03-2025 13:57:42,Pase NO otorgado al serial 2508005500003:Invalid BOM data submitted, item_qty is required
+21-03-2025 14:24:06La etiqueta: 05904245, No pertenece a HPC Consume.
+21-03-2025 14:24:43,Pase NO otorgado al serial 2508005500007:Cannot process inventory consumption: serial T2502200032 is assigned to part-rev 3022821040-A2, which is not registered as a BOM item for this product.
+21-03-2025 14:29:45,Pase NO otorgado al serial 2508005500009:Cannot process inventory consumption: serial T2500700040 is assigned to part-rev 3022822040-A2, which is not registered as a BOM item for this product.
+21-03-2025 14:32:15,Pase NO otorgado al serial 2508005500008:Cannot process inventory consumption: serial T250740000C is assigned to part-rev 3022821040-A2, which is not registered as a BOM item for this product.

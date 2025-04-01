@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HPC_Consume.RuncardWebService;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace HPC_Consume
 {
     public partial class FrmMain : Form
@@ -43,6 +44,7 @@ namespace HPC_Consume
         string opcode = string.Empty;
         string seqnum = string.Empty;
         string etiqnum = string.Empty;
+        float CANT = 0;
 
         //General Data
         int bomCount = 0;
@@ -52,6 +54,17 @@ namespace HPC_Consume
         int contDatagrid = 0;
         int etiqExpandor = 0;
         int errExpendor = 0;
+        Boolean alter = false;
+
+        string part1 = string.Empty;
+        string part2 = string.Empty;
+        string palabra = string.Empty;
+        string revpart1 = string.Empty;
+        string revpart2 = string.Empty;
+        string palabrarev = string.Empty;
+
+        string partNum = string.Empty;
+        string partRev = string.Empty;
         private void FrmMain_Load(object sender, EventArgs e)
         {
             try
@@ -359,19 +372,23 @@ namespace HPC_Consume
                         else 
                             dataGridView1.Rows.Add(Convert.ToString(bomCount + 1), item.partnum, item.partrev, "-", "-");
 
-
-
                         //Counter
                         bomCount++;
                         bom++;
+
+                        // Configura el DataGridView para permitir saltos de línea
+                        dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
                         foreach (unitBOM subItem in getBOM)
                         {
                             if (subItem.alt_for_item == item.item)
                             {
+                                int bom1 = bomCount - 1;
+                               
                                 //In case of altern add it
-                                dataGridView1.Rows[1].Cells[bomCount-1].Value = dataGridView1.Rows[1].Cells[bomCount - 1].Value + "\n" + subItem.partnum;
-                                dataGridView1.Rows[2].Cells[bomCount - 1].Value = dataGridView1.Rows[2].Cells[bomCount - 1].Value + "\n" + subItem.partrev;
+                                dataGridView1.Rows[bom1].Cells[1].Value = dataGridView1.Rows[bom1].Cells[1].Value + "\n" + subItem.partnum;
+                                dataGridView1.Rows[bom1].Cells[2].Value = dataGridView1.Rows[bom1].Cells[2].Value + "\n" + subItem.partrev;
+                                alter = true;
                                 break;
                             }
                         }
@@ -401,11 +418,9 @@ namespace HPC_Consume
             for (int x = 0; x < getBOM.Length; x++)
             {
                
-                var CellValue = dataGridView1.Rows[x].Cells[3].Value;
+                var CellValue = dataGridView1.Rows[0].Cells[3].Value;
                 if (CellValue.ToString() == "-")
-                    missing = missing + ", " + dataGridView1.Rows[x].Cells[1].Value.ToString();
-               
-                
+                    missing = missing + ", " + dataGridView1.Rows[0].Cells[1].Value.ToString();
             }
 
             if (missing.Length == 0)
@@ -435,6 +450,30 @@ namespace HPC_Consume
             tBoxReel.Focus();
         }
 
+        public void separarNumPartAlt()
+        {
+            for (int x = 0; x < bomCount; x++)
+            {
+                string parts = dataGridView1.Rows[x].Cells[1].Value.ToString();
+                string[] partdividido = parts.Split(new[] { '\n' }, StringSplitOptions.None);
+
+                part1 = partdividido[0];
+                part2 = partdividido[1];
+            }
+        }
+
+        public void separarRevAlt()
+        {
+            for (int x = 0; x < bomCount; x++)
+            {
+                string revs = dataGridView1.Rows[x].Cells[2].Value.ToString();
+                string[] revdividido = revs.Split(new[] { '\n' }, StringSplitOptions.None);
+
+
+                revpart1 = revdividido[0];
+                revpart2 = revdividido[1];
+            }
+        }
         private void tBoxReel_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter & tBoxReel.Text != string.Empty)
@@ -466,6 +505,8 @@ namespace HPC_Consume
                         //Si el dato empieza con los caracteres asignados
                         if (scanInfo.StartsWith("RG") | scanInfo.StartsWith("R") | scanInfo.StartsWith("G"))
                         {
+                                if (opcode == "A103")
+                                    alter = true;
                             //Si el uniqueId no esta vacío
                             if (scanInfo != "")
                             {
@@ -477,10 +518,11 @@ namespace HPC_Consume
                                 {
                                     //Almacenamiento de los datos
                                     string partStatus = fetchInv[0].status;
-                                    string partNum = fetchInv[0].partnum;
-                                    string partRev = fetchInv[0].partrev;
+                                    partNum = fetchInv[0].partnum;
+                                    partRev = fetchInv[0].partrev;
                                     string serial = fetchInv[0].serial;
                                     float quantity = fetchInv[0].qty;
+                                        CANT = quantity;
 
                                     //Si la cantidad es mayor a 0 y esta disponible/Si la cantidad es mayor a 0 y esta recibido
                                     if (quantity > 0 & partStatus == "AVAILABLE" | quantity > 0 & partStatus == "RECEIVED")
@@ -517,33 +559,71 @@ namespace HPC_Consume
                                                 string PART = dataGridView1.Rows[x].Cells[1].Value.ToString();
                                                 string REVISION = dataGridView1.Rows[x].Cells[2].Value.ToString();
                                                 //Si el valor de la posicion contiene el número de parte y revisión
-                                                if (PART == fetchInv[0].partnum & REVISION == fetchInv[0].partrev)
+                                                if (alter.Equals(true))
                                                 {
-                                                    //Si la posición de la tabla no ha sido asignado
-                                                    if (dataGridView1.Rows[x].Cells[3].Value.ToString() == "-" & dataGridView1.Rows[x].Cells[4].Value.ToString() == "-")
-                                                    {
-                                                        //Añade los datos
-                                                        dataGridView1.Rows[x].Cells[3].Value = serial;
-                                                        dataGridView1.Rows[x].Cells[4].Value = quantity.ToString();
+                                                    separarNumPartAlt();
+                                                    separarRevAlt();
 
-                                                        contador++;
-                                                        break;
-                                                    }
-                                                    else
+                                                    if (part1 == fetchInv[0].partnum | part2 == fetchInv[0].partnum)
                                                     {
-                                                        Message message1 = new Message(scanInfo + " ya escaneado.");
-                                                        message1.ShowDialog();
-                                                        break;
+                                                        if (revpart1 == fetchInv[0].partrev | revpart2 == fetchInv[0].partrev)
+                                                        {
+                                                            //Si la posición de la tabla no ha sido asignado
+
+                                                            if (dataGridView1.Rows[x].Cells[3].Value.ToString() == "-" & dataGridView1.Rows[x].Cells[4].Value.ToString() == "-")
+                                                            {
+                                                                //Añade los datos
+                                                                dataGridView1.Rows[x].Cells[3].Value = serial;
+                                                                dataGridView1.Rows[x].Cells[4].Value = quantity.ToString();
+
+                                                                contador++;
+                                                                break;
+                                                            }
+                                                            else
+                                                            {
+                                                                Message message1 = new Message(scanInfo + " ya escaneado.");
+                                                                message1.ShowDialog();
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    else if ((part1.Contains(partNum) & !revpart1.Contains(partRev)) || (part2.Contains(partNum) & !revpart2.Contains(partRev)))
+                                                    {
+                                                        Message message2 = new Message("El número de parte escaneado no pertenece al BOM " + scanInfo + "," + partNum + "-" + partRev + ", notificar.");
+                                                        message2.ShowDialog();
+                                                        errExpendor = 1;
                                                     }
                                                 }
-                                                else if (dataGridView1.Rows[x].Cells[1].Value.ToString().Contains(partNum) & !dataGridView1.Rows[x].Cells[2].Value.ToString().Contains(partRev))
+                                                else
                                                 {
-                                                    Message message2 = new Message("El número de parte escaneado no pertenece al BOM " + scanInfo + "," + partNum + "-" + partRev + ", notificar.");
-                                                    message2.ShowDialog();
-                                                    errExpendor = 1;
+                                                    if (PART == fetchInv[0].partnum & REVISION == fetchInv[0].partrev)
+                                                    {
+                                                        //Si la posición de la tabla no ha sido asignado
+
+                                                        if (dataGridView1.Rows[x].Cells[3].Value.ToString() == "-" & dataGridView1.Rows[x].Cells[4].Value.ToString() == "-")
+                                                        {
+                                                            //Añade los datos
+                                                            dataGridView1.Rows[x].Cells[3].Value = serial;
+                                                            dataGridView1.Rows[x].Cells[4].Value = quantity.ToString();
+
+                                                            contador++;
+                                                            break;
+                                                        }
+                                                        else
+                                                        {
+                                                            Message message1 = new Message(scanInfo + " ya escaneado.");
+                                                            message1.ShowDialog();
+                                                            break;
+                                                        }
+                                                    }
+                                                    else if (dataGridView1.Rows[x].Cells[1].Value.ToString().Contains(partNum) & !dataGridView1.Rows[x].Cells[2].Value.ToString().Contains(partRev))
+                                                    {
+                                                        Message message2 = new Message("El número de parte escaneado no pertenece al BOM " + scanInfo + "," + partNum + "-" + partRev + ", notificar.");
+                                                        message2.ShowDialog();
+                                                        errExpendor = 1;
+                                                    }
                                                 }
                                             }
-                                            Message message = new Message("BOM COMPLETADO");
                                         }
                                         else
                                         {
@@ -661,7 +741,6 @@ namespace HPC_Consume
                                                 errExpendor = 1;
                                             }
                                         }
-                                        Message message = new Message("BOM COMPLETADO");
                                     }
                                     else
                                     {
@@ -741,23 +820,81 @@ namespace HPC_Consume
             if (e.KeyCode == Keys.Enter & tBoxLabelA.Text != string.Empty)
             {
                 string scanInfo = "";
+                errExpendor = 0;
 
-                foreach (char c in tBoxLabelA.Text) {
+                foreach (char c in tBoxLabelA.Text)
+                {
                     if (!char.IsControl(c))
-                    { 
+                    {
                         scanInfo = scanInfo + c;
                     }
                 }
 
-                if (scanInfo.StartsWith("25"))
+                if (etiqnum == "1")
                 {
-                    if (etiqnum == "1" & opcode == "A100" || opcode == "A103" || opcode == "A104")
+                    if (opcode == "A100")
                     {
-                        //Temporal Data
+                        if (scanInfo.StartsWith("25"))
+                        {
+                            //temporal Data
+                            int response = 0;
+
+                            //Register Unit
+                            serialRegister(tBoxLabelA.Text, out response);
+
+                            if (response != 0)
+                            {
+                                //Control Adjust
+                                tBoxLabelA.Clear();
+                                tBoxLabelA.Focus();
+                                return;
+                            }
+                            serialTransaction(tBoxLabelA.Text, out response);
+
+                            if (response != 0)
+                            {
+                                //Control Adjust
+                                tBoxLabelA.Clear();
+                                tBoxLabelA.Focus();
+                                return;
+                            }
+
+                            //Control Adjust
+                            tBoxLabelA.Enabled = true;
+                            tBoxReel.Enabled = false;
+                            tBoxLabelA.Clear();
+                            tBoxReel.Clear();
+                            tBoxLabelA.Focus();
+                        }
+                        else
+                        {
+                            //LOG
+                            File.AppendAllText(Directory.GetCurrentDirectory() + @"\errorLog.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + "La etiqueta: " + scanInfo + ", No pertenece a HPC Consume.\n");
+
+                            Message message = new Message("La etiqueta: " + scanInfo + ", No pertenece a HPC Consume.");
+                            message.ShowDialog();
+                            errExpendor = 1;
+                        }
+
+                        if (errExpendor == 1)
+                        {
+
+                            tBoxLabelA.Enabled = true;
+                            tBoxLabelA.Clear();
+                            tBoxLabelA.Focus();
+                        }
+
+                    }
+                    else if (opcode == "A103" || opcode == "A104")
+                    {
+                        string serial1 = tBoxLabelA.Text.Substring(1);
+
+
+                        //temporal Data
                         int response = 0;
 
                         //Register Unit
-                        serialRegister(tBoxLabelA.Text, out response);
+                        serialRegister(serial1, out response);
 
                         if (response != 0)
                         {
@@ -766,9 +903,7 @@ namespace HPC_Consume
                             tBoxLabelA.Focus();
                             return;
                         }
-
-                        //Transaction Unit
-                        serialTransaction(tBoxLabelA.Text, out response);
+                        serialTransaction(serial1, out response);
 
                         if (response != 0)
                         {
@@ -784,10 +919,8 @@ namespace HPC_Consume
                         tBoxLabelA.Clear();
                         tBoxReel.Clear();
                         tBoxLabelA.Focus();
-
                     }
-                    else
-                    if (etiqnum == "1" & opcode == "A101")
+                    else if (opcode == "A101")
                     {
                         //Temporal Data
                         int response = 0;
@@ -821,7 +954,10 @@ namespace HPC_Consume
                         tBoxReel.Clear();
                         tBoxReel.Focus();
                     }
-                    if (etiqnum == "2" || opcode == "A101")
+                }
+                else if (etiqnum == "2")
+                {
+                    if (opcode == "A101")
                     {
                         //Temporal Data
                         int response = 0;
@@ -856,15 +992,6 @@ namespace HPC_Consume
                         tBoxLabelB.Focus();
                     }
                 }
-                else
-                {
-                    //LOG
-                    File.AppendAllText(Directory.GetCurrentDirectory() + @"\errorLog.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + "La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.\n");
-
-                    Message message = new Message("La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.");
-                    message.ShowDialog();
-                    errExpendor = 1;
-                }
             }
         }
 
@@ -873,18 +1000,18 @@ namespace HPC_Consume
             if (e.KeyCode == Keys.Enter & tBoxLabelB.Text != string.Empty)
             {
                 string scanInfo = "";
+                errExpendor = 0;
 
-                foreach (char c in tBoxLabelB.Text)
+                foreach (char c in tBoxLabelA.Text)
                 {
                     if (!char.IsControl(c))
                     {
                         scanInfo = scanInfo + c;
                     }
                 }
-
-                if (scanInfo.StartsWith("25"))
+                if (opcode == "A100")
                 {
-                    if (opcode == "A100")
+                    if (scanInfo.StartsWith("25"))
                     {
                         //Temporal Data
                         int response = 0;
@@ -919,48 +1046,57 @@ namespace HPC_Consume
                     }
                     else
                     {
-                        //Temporal Data
-                        int response = 0;
+                        //Log
+                        File.AppendAllText(Directory.GetCurrentDirectory() + @"\errorLog.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + "La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.\n");
 
-                        //Register Unit
-                        serialRegister(tBoxLabelB.Text, out response);
-
-                        if (response != 0)
-                        {
-                            //Control Adjust
-                            tBoxLabelB.Clear();
-                            tBoxLabelB.Focus();
-                            return;
-                        }
-
-                        //Transaction Unit
-                        serialTransaction(tBoxLabelB.Text, out response);
-
-                        if (response != 0)
-                        {
-                            //Control Adjust
-                            tBoxLabelB.Clear();
-                            tBoxLabelB.Focus();
-                            return;
-                        }
-
-                        //Control Adjust
-                        tBoxLabelB.Enabled = false;
-                        tBoxReel.Enabled = true;
-                        tBoxReel.Clear();
-                        tBoxLabelA.Clear();
-                        tBoxLabelB.Clear();
-                        tBoxReel.Focus();
+                        Message message = new Message("La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.");
+                        message.ShowDialog();
+                        errExpendor = 1;
                     }
+
+                    if (errExpendor == 1)
+                    {
+
+                        tBoxLabelA.Enabled = true;
+                        tBoxLabelA.Clear();
+                        tBoxLabelA.Focus();
+                    }
+                   
                 }
                 else
                 {
-                    //Log
-                    File.AppendAllText(Directory.GetCurrentDirectory() + @"\errorLog.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + "La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.\n");
+                    //Temporal Data
+                    int response = 0;
 
-                    Message message = new Message("La etiqueta: " + scanInfo + ", No pertenece a HPC Expando.");
-                    message.ShowDialog();
-                    errExpendor = 1;
+                    //Register Unit
+                    serialRegister(tBoxLabelB.Text, out response);
+
+                    if (response != 0)
+                    {
+                        //Control Adjust
+                        tBoxLabelB.Clear();
+                        tBoxLabelB.Focus();
+                        return;
+                    }
+
+                    //Transaction Unit
+                    serialTransaction(tBoxLabelB.Text, out response);
+
+                    if (response != 0)
+                    {
+                        //Control Adjust
+                        tBoxLabelB.Clear();
+                        tBoxLabelB.Focus();
+                        return;
+                    }
+
+                    //Control Adjust
+                    tBoxLabelB.Enabled = false;
+                    tBoxReel.Enabled = true;
+                    tBoxReel.Clear();
+                    tBoxLabelA.Clear();
+                    tBoxLabelB.Clear();
+                    tBoxReel.Focus();
                 }
             }
         }
@@ -970,13 +1106,15 @@ namespace HPC_Consume
             int register = -1;
             response = 0;
             int qty = 0;
+            float REDONDEO = 0;
+            float cantidad = CANT / 20;
+
+            REDONDEO = (float)Math.Round(cantidad, 0);
             try
             {
                 if (opcode == "A103")
-                    qty = 500;
-                else if (opcode == "A100")
-                    qty = 2;
-                else
+                    qty = Convert.ToInt32(REDONDEO);
+                else 
                     qty = 1;
 
                 register = client.registerUnitToWorkOrder(cBoxWorkOrder.Text, serial, qty, "", "", "WIP", "PRODUCTION FLOOR", "ftest", out string msg);
@@ -1032,9 +1170,12 @@ namespace HPC_Consume
             string partrev = string.Empty;
             string status = string.Empty;
             int step = 0;
-
+            float cantidad2 = 0;
+            float redondeo = 0;
+            int qty1 = 0;
             //Response
             response = 0;
+            int cantBom1 = 0;
 
             try
             {
@@ -1073,16 +1214,26 @@ namespace HPC_Consume
                 transItem.opcode = operation;
                 transItem.serial = serial;
                 if (opcode == "A103")
-                    transItem.trans_qty = 250;
-                else if (opcode == "A100")
-                    transItem.trans_qty = 2;
+                {
+                    cantidad2 = CANT / 20;
+                    redondeo = (float)Math.Round(cantidad2, 0);
+                    transItem.trans_qty = redondeo;
+                }
                 else
                     transItem.trans_qty = 1;
                 transItem.seqnum = step;
                 transItem.comment = "TRANSACCION HECHA POR SISTEMA";
 
+                if (opcode == "A103")
+                {
+                    cantBom1 = 1;
+                }
+                else
+                {
+                    cantBom1 = getBOM.Length;
+                }
                 //Data/BOM Item
-                bomItem[] bomData = new bomItem[getBOM.Length];
+                bomItem[] bomData = new bomItem[cantBom1];//getBOM.Length];
                 dataItem[] inputData = new dataItem[] { };
 
                 //Counter
@@ -1093,7 +1244,7 @@ namespace HPC_Consume
                 string partnum1 = string.Empty;
                 string uniqueId = string.Empty;
                 int cantidad = 0; 
-                string rev = string.Empty;  
+                string rev = string.Empty;
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
@@ -1103,44 +1254,58 @@ namespace HPC_Consume
                     partnum1 = row.Cells[1].Value.ToString();
                     rev = row.Cells[2].Value.ToString();
 
-                    if (opcode == "A100" || opcode == "A103")
-                        cantidad = Convert.ToInt32(row.Cells[4].Value.ToString());
-                    else if (opcode == "A101" || opcode == "A104")
+                    cantidad = Convert.ToInt32(row.Cells[4].Value.ToString());
+                    
+                        //Load BOM
+                        bomData[bom] = new bomItem();
+                        bomData[bom].item_serial = uniqueId;
+
+                    if (opcode == "A103")
                     {
-                        cantidad = Convert.ToInt32(row.Cells[4].Value.ToString());
-                        etiqExpandor++;
+                        bomData[bom].item_partnum = partNum;
+                        bomData[bom].item_partrev = partRev;
+                    }
+                    else
+                    {
+                        bomData[bom].item_partnum = partnum1;
+                        bomData[bom].item_partrev = rev;
                     }
 
-                    //Load BOM
-                    bomData[bom] = new bomItem();
-                    bomData[bom].item_serial = uniqueId;
-                    bomData[bom].item_partnum = partnum1;
-                    bomData[bom].item_partrev = rev;
-
-                    foreach (unitBOM part in getBOM)
-                        if (partnum1 == part.partnum)
-                        {
-                            if (opcode == "A103")
-                                //Load BOM
-                                bomData[bom].item_qty = 250;
-                            else if (opcode == "A100")
-                                bomData[bom].item_qty = 2;
-                            else
-                                bomData[bom].item_qty = 1;
-
-                            //Por cada pieza del BOM
-                            for (int x = 0; x < dataGridView1.Rows.Count; x++)
+                        foreach (unitBOM part in getBOM)
+                            if (partNum == part.partnum)
                             {
-                                //Si el número de parte coincide con el encontrado
-                                if (partnum1.Contains(part.partnum))
+                                if (opcode == "A103")
                                 {
-                                    if (uniqueId.ToString() != "-")
+                                    //Load BOM
+
+                                    bomData[bom].item_qty = redondeo;
+                                }
+                                else
+                                    bomData[bom].item_qty = 1;
+
+                                //Por cada pieza del BOM
+                                for (int x = 0; x < dataGridView1.Rows.Count; x++)
+                                {
+                                string partenum = string.Empty;
+
+                                if (opcode == "A103")
+                                {
+                                    partenum = partNum;
+                                }
+                                else
+                                {
+                                    partnum = partnum1;
+                                }
+                                    //Si el número de parte coincide con el encontrado
+                                    if (partnum.Contains(part.partnum) )
                                     {
-                                        if(opcode == "A100" || opcode == "A103" || opcode == "A104")
-                                        { 
-                                            //Nueva cantidad con el descuento
-                                            //dataGridView1.Rows[x].Cells[5].Value = (cantidad - part.qty).ToString();
-                                            cantidad = (cantidad - Convert.ToInt32(part.qty));
+                                        if (uniqueId.ToString() != "-")
+                                        {
+                                            if (opcode == "A100")
+                                                cantidad = (cantidad - Convert.ToInt32(part.qty));
+                                            else
+                                                if (opcode == "A103")
+                                                cantidad = (cantidad - Convert.ToInt32(redondeo));
 
                                             //Si el id expiro
                                             if (cantidad <= 0)
@@ -1156,39 +1321,20 @@ namespace HPC_Consume
                                             }
 
                                             dataGridView1.Rows[x].Cells[4].Value = Convert.ToString(cantidad);
+
                                         }
-                                        else if (opcode == "A101")
-                                        {
-                                            //Nueva cantidad con el descuento
-                                            cantidad = (cantidad - 1);
-
-                                            //Si el id expiro
-                                            if (etiqExpandor ==2)
-                                            {
-                                                //Reinicia los valores del campo
-                                                dataGridView1.Rows[x].Cells[3].Value = "-";
-                                                dataGridView1.Rows[x].Cells[4].Value = "-";
-
-                                                //
-                                                partToRemove.Add(part.partnum);
-
-                                                tBoxReel.Enabled = true;
-                                                tBoxLabelA.Enabled = false;
-                                            }
-                                        }
+                                        break;
                                     }
-                                    break;
                                 }
+                                break;
                             }
+
+                        //Count
+                        bom++;
+
+                        if (dataGridView1.Rows.Count == 0)
                             break;
-                        }
-
-                    //Count
-                    bom++;
-
-                    if (dataGridView1.Rows.Count == 0)
-                        break;
-                    }
+                }
 
                 try
                 {
@@ -1202,7 +1348,7 @@ namespace HPC_Consume
                         lblMessage.Text = "Pase NO otorgado al serial " + serial;
                         tLayoutMessage.BackColor = Color.Crimson;
                         MostrarMensajeFlotanteNoPass(" NO PASS");
-
+                        alter = false;
                         //Log
                         File.AppendAllText(Directory.GetCurrentDirectory() + @"\errorLog.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + ",Pase NO otorgado al serial " + serial + ":" + msg + "\n");
 
@@ -1215,6 +1361,7 @@ namespace HPC_Consume
                     lblMessage.Text = "Serial " + serial + " Completado";
                     tLayoutMessage.BackColor = Color.FromArgb(58, 196, 123);
                     MostrarMensajeFlotante("P A S S");
+                    alter = false;
 
                     //Log
                     File.AppendAllText(Directory.GetCurrentDirectory() + @"\Log.txt", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + "," + msg + "\n");
@@ -1363,22 +1510,22 @@ namespace HPC_Consume
             btnChange.Enabled = true;
             tBoxReel.Enabled = true;
             lblMessage.Text = "";
-            
-
-            for (int x = 0; x < getBOM.Length; x++)
+            int cantBom = 0;
+            if (opcode == "A103")
             {
-                if (opcode == "A100" || opcode == "A101" || opcode == "A103" || opcode == "A104")
-                {
-                    dataGridView1.Rows[x].Cells["UniqueId"].Value = "-";
-                    dataGridView1.Rows[x].Cells["Cantidad"].Value = "-";
+                cantBom = 1;
+            }
+            else
+            {
+                cantBom = getBOM.Length;
+            }
 
-                    contador = 0;
-                }
-                else 
-                if (opcode == "A100" || opcode == "A104")
-                {
-                    contador--;
-                }
+            for (int x = 0; x < cantBom; x++)
+            {
+                dataGridView1.Rows[x].Cells["UniqueId"].Value = "-";
+                dataGridView1.Rows[x].Cells["Cantidad"].Value = "-";
+
+                contador = 0;
             }
             //Check BOM Data
             checkBOMData();
