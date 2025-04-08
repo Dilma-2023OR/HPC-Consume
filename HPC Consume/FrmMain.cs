@@ -58,9 +58,11 @@ namespace HPC_Consume
 
         string part1 = string.Empty;
         string part2 = string.Empty;
+        string part3 = string.Empty;
         string palabra = string.Empty;
         string revpart1 = string.Empty;
         string revpart2 = string.Empty;
+        string revpart3 = string.Empty;
         string palabrarev = string.Empty;
 
         string partNum = string.Empty;
@@ -389,7 +391,6 @@ namespace HPC_Consume
                                 dataGridView1.Rows[bom1].Cells[1].Value = dataGridView1.Rows[bom1].Cells[1].Value + "\n" + subItem.partnum;
                                 dataGridView1.Rows[bom1].Cells[2].Value = dataGridView1.Rows[bom1].Cells[2].Value + "\n" + subItem.partrev;
                                 alter = true;
-                                break;
                             }
                         }
                     }
@@ -459,6 +460,7 @@ namespace HPC_Consume
 
                 part1 = partdividido[0];
                 part2 = partdividido[1];
+                part3 = partdividido[2];
             }
         }
 
@@ -472,6 +474,7 @@ namespace HPC_Consume
 
                 revpart1 = revdividido[0];
                 revpart2 = revdividido[1];
+                revpart3 = revdividido[2];
             }
         }
         private void tBoxReel_KeyDown(object sender, KeyEventArgs e)
@@ -564,9 +567,9 @@ namespace HPC_Consume
                                                     separarNumPartAlt();
                                                     separarRevAlt();
 
-                                                    if (part1 == fetchInv[0].partnum | part2 == fetchInv[0].partnum)
+                                                    if (part1 == fetchInv[0].partnum | part2 == fetchInv[0].partnum | part3 == fetchInv[0].partnum)
                                                     {
-                                                        if (revpart1 == fetchInv[0].partrev | revpart2 == fetchInv[0].partrev)
+                                                        if (revpart1 == fetchInv[0].partrev | revpart2 == fetchInv[0].partrev | revpart3 == fetchInv[0].partrev)
                                                         {
                                                             //Si la posición de la tabla no ha sido asignado
 

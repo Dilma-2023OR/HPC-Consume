@@ -84,7 +84,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -122,7 +122,7 @@
             this.tableLayoutPanel2.Controls.Add(this.btnChange, 3, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 206);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -139,8 +139,8 @@
             this.cBoxWorkOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cBoxWorkOrder.Font = new System.Drawing.Font("Century Gothic", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter);
             this.cBoxWorkOrder.FormattingEnabled = true;
-            this.cBoxWorkOrder.Location = new System.Drawing.Point(850, 80);
-            this.cBoxWorkOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxWorkOrder.Location = new System.Drawing.Point(850, 79);
+            this.cBoxWorkOrder.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxWorkOrder.Name = "cBoxWorkOrder";
             this.cBoxWorkOrder.Size = new System.Drawing.Size(363, 42);
             this.cBoxWorkOrder.Sorted = true;
@@ -182,8 +182,8 @@
             this.cBoxPartNum.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cBoxPartNum.Font = new System.Drawing.Font("Century Gothic", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter);
             this.cBoxPartNum.FormattingEnabled = true;
-            this.cBoxPartNum.Location = new System.Drawing.Point(479, 80);
-            this.cBoxPartNum.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxPartNum.Location = new System.Drawing.Point(479, 79);
+            this.cBoxPartNum.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxPartNum.Name = "cBoxPartNum";
             this.cBoxPartNum.Size = new System.Drawing.Size(363, 42);
             this.cBoxPartNum.Sorted = true;
@@ -213,7 +213,7 @@
             this.btnChange.Font = new System.Drawing.Font("Ebrima", 5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.btnChange.ForeColor = System.Drawing.Color.Black;
             this.btnChange.Location = new System.Drawing.Point(1221, 78);
-            this.btnChange.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnChange.Margin = new System.Windows.Forms.Padding(4);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(169, 46);
             this.btnChange.TabIndex = 6;
@@ -234,13 +234,13 @@
             this.tableLayoutPanel3.Controls.Add(this.lblVersion, 2, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 357);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.58206F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.41794F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.96183F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.03817F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1869, 698);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1869, 818);
             this.tableLayoutPanel3.TabIndex = 18;
             // 
             // gBoxValidation
@@ -249,11 +249,11 @@
             this.gBoxValidation.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gBoxValidation.Font = new System.Drawing.Font("72 Black", 20F);
             this.gBoxValidation.ForeColor = System.Drawing.Color.Black;
-            this.gBoxValidation.Location = new System.Drawing.Point(316, 421);
-            this.gBoxValidation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxValidation.Location = new System.Drawing.Point(314, 436);
+            this.gBoxValidation.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxValidation.Name = "gBoxValidation";
-            this.gBoxValidation.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gBoxValidation.Size = new System.Drawing.Size(1236, 241);
+            this.gBoxValidation.Padding = new System.Windows.Forms.Padding(4);
+            this.gBoxValidation.Size = new System.Drawing.Size(1240, 346);
             this.gBoxValidation.TabIndex = 16;
             this.gBoxValidation.TabStop = false;
             this.gBoxValidation.Text = "Transacción de Material";
@@ -272,7 +272,7 @@
             this.tableLayoutPanel5.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(4, 43);
-            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 6;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
@@ -281,7 +281,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1228, 194);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1232, 299);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // tBoxLabelA
@@ -290,8 +290,8 @@
             this.tBoxLabelA.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tBoxLabelA.Enabled = false;
             this.tBoxLabelA.Font = new System.Drawing.Font("Century Gothic", 5.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter);
-            this.tBoxLabelA.Location = new System.Drawing.Point(410, 62);
-            this.tBoxLabelA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxLabelA.Location = new System.Drawing.Point(412, 62);
+            this.tBoxLabelA.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxLabelA.MaxLength = 50;
             this.tBoxLabelA.Name = "tBoxLabelA";
             this.tBoxLabelA.Size = new System.Drawing.Size(407, 39);
@@ -305,7 +305,7 @@
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Ebrima", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(406, 105);
+            this.label9.Location = new System.Drawing.Point(408, 105);
             this.label9.Margin = new System.Windows.Forms.Padding(0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(192, 46);
@@ -318,8 +318,8 @@
             this.tBoxLabelB.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tBoxLabelB.Enabled = false;
             this.tBoxLabelB.Font = new System.Drawing.Font("Century Gothic", 5.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter);
-            this.tBoxLabelB.Location = new System.Drawing.Point(410, 155);
-            this.tBoxLabelB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxLabelB.Location = new System.Drawing.Point(412, 155);
+            this.tBoxLabelB.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxLabelB.MaxLength = 50;
             this.tBoxLabelB.Name = "tBoxLabelB";
             this.tBoxLabelB.Size = new System.Drawing.Size(407, 39);
@@ -333,7 +333,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Ebrima", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(406, 12);
+            this.label4.Location = new System.Drawing.Point(408, 12);
             this.label4.Margin = new System.Windows.Forms.Padding(0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(194, 46);
@@ -342,6 +342,7 @@
             // 
             // tLayoutMessage
             // 
+            this.tLayoutMessage.AutoSize = true;
             this.tLayoutMessage.BackColor = System.Drawing.Color.White;
             this.tLayoutMessage.ColumnCount = 1;
             this.tableLayoutPanel5.SetColumnSpan(this.tLayoutMessage, 3);
@@ -353,7 +354,7 @@
             this.tLayoutMessage.Name = "tLayoutMessage";
             this.tLayoutMessage.RowCount = 1;
             this.tLayoutMessage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLayoutMessage.Size = new System.Drawing.Size(1228, 226);
+            this.tLayoutMessage.Size = new System.Drawing.Size(1232, 101);
             this.tLayoutMessage.TabIndex = 9;
             // 
             // lblMessage
@@ -363,7 +364,7 @@
             this.lblMessage.BackColor = System.Drawing.Color.Transparent;
             this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(522, 85);
+            this.lblMessage.Location = new System.Drawing.Point(524, 23);
             this.lblMessage.Margin = new System.Windows.Forms.Padding(0);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(183, 55);
@@ -388,18 +389,17 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.AutoSize = true;
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.tableLayoutPanel7);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Ebrima", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(316, 4);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(314, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1236, 409);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1240, 424);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingreso de BOM";
@@ -417,7 +417,7 @@
             this.tableLayoutPanel7.Controls.Add(this.btnClean, 2, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(4, 53);
-            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 5;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
@@ -425,7 +425,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1228, 352);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1232, 367);
             this.tableLayoutPanel7.TabIndex = 12;
             // 
             // tBoxReel
@@ -434,8 +434,8 @@
             this.tBoxReel.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tBoxReel.Enabled = false;
             this.tBoxReel.Font = new System.Drawing.Font("Century Gothic", 5.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter);
-            this.tBoxReel.Location = new System.Drawing.Point(410, 75);
-            this.tBoxReel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxReel.Location = new System.Drawing.Point(412, 75);
+            this.tBoxReel.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxReel.MaxLength = 100;
             this.tBoxReel.Name = "tBoxReel";
             this.tBoxReel.Size = new System.Drawing.Size(407, 39);
@@ -449,7 +449,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Ebrima", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(406, 25);
+            this.label10.Location = new System.Drawing.Point(408, 25);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(118, 46);
@@ -475,12 +475,11 @@
             // 
             this.tableLayoutPanel7.SetColumnSpan(this.panel5, 3);
             this.panel5.Controls.Add(this.dataGridView1);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(4, 129);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
             this.tableLayoutPanel7.SetRowSpan(this.panel5, 2);
-            this.panel5.Size = new System.Drawing.Size(1220, 389);
+            this.panel5.Size = new System.Drawing.Size(1220, 227);
             this.panel5.TabIndex = 15;
             // 
             // dataGridView1
@@ -528,7 +527,7 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dataGridView1.Size = new System.Drawing.Size(1213, 370);
+            this.dataGridView1.Size = new System.Drawing.Size(1213, 225);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
@@ -540,8 +539,8 @@
             this.btnClean.Enabled = false;
             this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClean.Font = new System.Drawing.Font("Ebrima", 5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
-            this.btnClean.Location = new System.Drawing.Point(940, 75);
-            this.btnClean.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClean.Location = new System.Drawing.Point(943, 75);
+            this.btnClean.Margin = new System.Windows.Forms.Padding(4);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(169, 46);
             this.btnClean.TabIndex = 6;
@@ -555,11 +554,11 @@
             this.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Ebrima", 4F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Millimeter);
-            this.lblVersion.Location = new System.Drawing.Point(1795, 669);
+            this.lblVersion.Location = new System.Drawing.Point(1795, 789);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(71, 25);
             this.lblVersion.TabIndex = 17;
-            this.lblVersion.Text = "2.0.0.6";
+            this.lblVersion.Text = "2.0.0.7";
             // 
             // timerTextReset
             // 
@@ -571,7 +570,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1869, 1055);
+            this.ClientSize = new System.Drawing.Size(1869, 1175);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
